@@ -1,0 +1,34 @@
+## Instructions
+
+->   x     Push {x}
+<-         Pop
+~>         Pop to buffer
+<~         Push back to the queue
+@@         Swap the last two items
+:;         Reverse the whole stack
+<<         Push 1 byte of data from stdin
+>>         Print the popped item to stdout
+++         Increment last item
+--         Decrement last item
+M+         Push the result of {last item} + {2nd last item}
+M-         Push the result of {last item} - {2nd last item} 
+M*         Push the result of {last item} * {2nd last item}
+M/         Push the result of {last item} / {2nd last item}
+M%         Push the result of {last item} % {2nd last item}
+<>   x y   Repeat last {x} instructions {y} times
+><   x     Repeat last {x} instructions forever
+??   x     Skip {x} instructions IF buffer != last item on the stack
+!!         Halt
+
+## Example & visualization
+
+[1 2 3 4 5 6 7 8] Stack
+{2}               Buffer
+
+- The buffer can only store 1 byte of data at a time
+
+[]    {}
+[1]   {}  ->1
+[1 2] {}  ->2
+[1]   {2} ~>
+
