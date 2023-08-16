@@ -19,6 +19,7 @@ func main() {
 	file, err := os.Open("main.tt")
 	handle(err)
 	defer file.Close()
+
 	scanner := bufio.NewScanner(file)
 
 	var line int
@@ -30,14 +31,10 @@ func main() {
 		instruction := parts[0]
 
 		var arg1 int
-		// var arg2 int
 		
 		if len(parts) > 1 { 
 			arg1, _ = strconv.Atoi(parts[1])
 		}
-		// } else if len(parts) > 2 {
-		// 	arg2, _ = strconv.Atoi(parts[2])
-		// }
 
 		switch instruction {
 		case "->": 
@@ -74,14 +71,19 @@ func main() {
 		case "--":
 			stack[len(stack)-1]--
 
+		case "<>":
+			line = arg1
+		
 		case "??":
 			if int(buffer) != stack[len(stack)-1] {
 				line += arg1
 			}
+
+		case "!!":
+			fmt.Printf("\033[33m\n%d \033[32m[%d]", stack, buffer)
+			os.Exit(0)
 		}
-	
+
 		line++
 	}
-
-	fmt.Printf("\033[33m\n%d \033[32m[%d]", stack, buffer)
 }
